@@ -81,7 +81,8 @@ const styles = StyleSheet.create({
     borderRadius:12,
     marginTop:10,
     borderWidth:1,
-    borderColor:'#747fe854'
+    borderColor:'#747fe854',
+    backgroundColor:'#f2f2f2'
   },
   selectedItem: {
     borderColor: '#747EEF',

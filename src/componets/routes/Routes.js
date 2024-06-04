@@ -17,6 +17,14 @@ import Home from '../screens/home/Home';
 import TrackProgress from '../screens/cencel&TrackProgress/TrackProgress';
 import Cencel from '../screens/cencel&TrackProgress/Cencel';
 import Receipt from '../screens/cencel&TrackProgress/Receipt';
+import HireNowStepOne from '../screens/particularCarScreen/HireNowStepOne'
+import HireNowStepTwo from '../screens/particularCarScreen/HireNowStepTwo'
+import HireNowStepThree from '../screens/particularCarScreen/HireNowStepThree'
+import ParticularCarScreen from '../screens/particularCarScreen/ParticularCarScreen';
+import AddCardScreen from '../screens/particularCarScreen/AddCard';
+import ParticularReview from '../screens/particularCarScreen/ParticularReview';
+import EditProfileInfor from '../screens/setting/EditProfileInfor';
+import Notifications from '../screens/setting/Notifications';
 function App() {
   const Stack = createStackNavigator();
   const navigation = useNavigation();
@@ -55,6 +63,98 @@ function App() {
       <Stack.Screen options={{ headerShown: false }} name="OtpScreen" component={OtpScreen} />
       <Stack.Screen options={{ headerShown: false }} name="EnableLocation" component={EnableLocation} />
       <Stack.Screen options={{ headerShown: false }} name="Dashbaord" component={Dashbaord} />
+      <Stack.Screen options={{ headerShown: false }} name="ParticularCarScreen" component={ParticularCarScreen} />
+      <Stack.Screen
+        name="StepOne"
+        component={HireNowStepOne}
+        options={{
+          headerLeft: () => (
+            <TouchableOpacity style={{ flexDirection: "row", marginLeft: 13 }} onPress={() => navigation.goBack()}>
+              <BackIcon name="arrowleft" size={23} color='#747EEF' style={{ marginRight: 18 }} />
+              <Text style={[styles.backicontext, { marginLeft: -10 }]}>Hire Now</Text>
+            </TouchableOpacity>
+          ),
+          title: null,
+        }}
+      />
+       <Stack.Screen
+        name="AddCard"
+        component={AddCardScreen}
+        options={{
+          headerLeft: () => (
+            <TouchableOpacity style={{ flexDirection: "row", marginLeft: 13 }} onPress={() => navigation.goBack()}>
+              <BackIcon name="arrowleft" size={23} color='#747EEF' style={{ marginRight: 18 }} />
+              <Text style={[styles.backicontext, { marginLeft: -10 }]}>Hire Now</Text>
+            </TouchableOpacity>
+          ),
+          title: null,
+        }}
+      />
+       <Stack.Screen
+        name="EditProfileInfor"
+        component={EditProfileInfor}
+        options={{
+          headerLeft: () => (
+            <TouchableOpacity style={{ flexDirection: "row", marginLeft: 13 }} onPress={() => navigation.goBack()}>
+              <BackIcon name="arrowleft" size={23} color='#747EEF' style={{ marginRight: 18 }} />
+              <Text style={[styles.backicontext, { marginLeft: -10 }]}>Profile Information</Text>
+            </TouchableOpacity>
+          ),
+          title: null,
+        }}
+      />
+      <Stack.Screen
+        name="Notifications"
+        component={Notifications}
+        options={{
+          headerLeft: () => (
+            <TouchableOpacity style={{ flexDirection: "row", marginLeft: 13 }} onPress={() => navigation.goBack()}>
+              <BackIcon name="arrowleft" size={23} color='#747EEF' style={{ marginRight: 18 }} />
+              <Text style={[styles.backicontext, { marginLeft: -10 }]}>Notifications</Text>
+            </TouchableOpacity>
+          ),
+          title: null,
+        }}
+      />
+      <Stack.Screen
+        name="StepTwo"
+        component={HireNowStepTwo}
+        options={{
+          headerLeft: () => (
+            <TouchableOpacity style={{ flexDirection: "row", marginLeft: 13 }} onPress={() => navigation.goBack()}>
+              <BackIcon name="arrowleft" size={23} color='#747EEF' style={{ marginRight: 18 }} />
+              <Text style={[styles.backicontext, { marginLeft: -10 }]}>Hire Now</Text>
+            </TouchableOpacity>
+          ),
+          title: null,
+        }}
+      />
+      <Stack.Screen
+        name="StepThree"
+        component={HireNowStepThree}
+        options={{
+          headerLeft: () => (
+            <TouchableOpacity style={{ flexDirection: "row", marginLeft: 13 }} onPress={() => navigation.goBack()}>
+              <BackIcon name="arrowleft" size={23} color='#747EEF' style={{ marginRight: 18 }} />
+              <Text style={[styles.backicontext, { marginLeft: -10 }]}>Hire Now</Text>
+            </TouchableOpacity>
+          ),
+          title: null,
+        }}
+      />
+      <Stack.Screen
+        name="ParticularReview"
+        component={ParticularReview}
+        options={{
+          headerLeft: () => (
+            <TouchableOpacity style={{ flexDirection: "row", marginLeft: 13 }} onPress={() => navigation.goBack()}>
+              <BackIcon name="arrowleft" size={23} color='#747EEF' style={{ marginRight: 18 }} />
+              <Text style={[styles.backicontext, { marginLeft: -10 }]}>Seller Reviews</Text>
+            </TouchableOpacity>
+          ),
+          title: null,
+        }}
+      />
       <Stack.Screen
         name="Setting"
         component={Setting}

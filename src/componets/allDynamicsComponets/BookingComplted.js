@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     // width:85
   },
   secondDivTitle:{
-backgroundColor:'#F2F3FD',
+backgroundColor:'#F2F2F2',
     width:'100%',
     borderRadius:10,
     padding:15,

@@ -2,9 +2,9 @@ import React from 'react'
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import Arrow from 'react-native-vector-icons/MaterialIcons'
 import { FontsGeneral } from '../screens/style'
-const IconBtnArrow = ({Name,Imagess}) => {
+const IconBtnArrow = ({Name,Imagess,HandleClick}) => {
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={HandleClick}>
 
    
     <View style={[styles.MainContinerBtn,{ justifyContent:'space-between',borderWidth:0.5,padding:6,borderRadius:10,marginTop:10}]}>

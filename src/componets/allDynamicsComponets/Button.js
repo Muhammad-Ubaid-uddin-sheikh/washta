@@ -2,9 +2,6 @@ import React from 'react';
 import { View, Text, StyleSheet, } from 'react-native';
 import {  Fonts, FontsGeneral } from '../screens/style';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-
-
-
 const Home = ({text,Link}) => {
   
   return (
@@ -26,7 +23,8 @@ const styles = StyleSheet.create({
     backgroundColor:'white',
     width:'100%',
     backgroundColor:'#747EEF',
-    borderRadius:100
+    borderRadius:100,
+    paddingVertical:5
   },
   text: {
     width: 200,
@@ -35,7 +33,6 @@ const styles = StyleSheet.create({
     color:'white',
     fontSize:16,
     padding:10,
-   
   }
 });
 

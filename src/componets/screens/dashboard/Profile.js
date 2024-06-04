@@ -39,7 +39,7 @@ const Profile = ({ navigation }) => {
             <View style={styles.row}>
               <TouchableOpacity onPress={() => navigation.navigate('')}>
                 <View style={styles.ShoeCon}>
-                  <ImageEdit title="Editar foto" />
+                  <ImageEdit  />
                 </View>
               </TouchableOpacity>
               <View style={styles.ShoeConText} >
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
     flexDirection:'row',
     justifyContent:'space-between',
     alignItems:'center',
-    backgroundColor:'#F2F3FD',
+    backgroundColor:'#F2F2F2',
     width:'100%',
     padding:15,
     borderRadius:12,
