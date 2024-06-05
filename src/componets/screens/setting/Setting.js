@@ -21,7 +21,7 @@ const Setting = () => {
         <IconBtnArrow HandleClick={()=>navigation.navigate('EditProfileInfor')} Imagess = {EditProfile} Name="Edit profile information"/>
         <IconBtnArrow HandleClick={()=>navigation.navigate('Notifications')} Imagess = { Bell} Name="Notifications"/>
         <IconBtnArrow Imagess = { Ticket} Name="Promo Codes"/>
-        <IconBtnArrow Imagess = { ShieldUser} Name="Security"/>
+        <IconBtnArrow HandleClick={()=>navigation.navigate('Security')} Imagess = { ShieldUser} Name="Security"/>
         <IconBtnArrow Imagess = { QuestionCircle} Name="Help & Support"/>
         <IconBtnArrow Imagess = { ShieldWarning} Name="Privacy policy"/>
         <View style={{paddingBottom:10}}>

@@ -25,6 +25,7 @@ import AddCardScreen from '../screens/particularCarScreen/AddCard';
 import ParticularReview from '../screens/particularCarScreen/ParticularReview';
 import EditProfileInfor from '../screens/setting/EditProfileInfor';
 import Notifications from '../screens/setting/Notifications';
+import Security from '../screens/setting/Security';
 function App() {
   const Stack = createStackNavigator();
   const navigation = useNavigation();
@@ -111,6 +112,19 @@ function App() {
             <TouchableOpacity style={{ flexDirection: "row", marginLeft: 13 }} onPress={() => navigation.goBack()}>
               <BackIcon name="arrowleft" size={23} color='#747EEF' style={{ marginRight: 18 }} />
               <Text style={[styles.backicontext, { marginLeft: -10 }]}>Notifications</Text>
+            </TouchableOpacity>
+          ),
+          title: null,
+        }}
+      />
+       <Stack.Screen
+        name="Security"
+        component={Security}
+        options={{
+          headerLeft: () => (
+            <TouchableOpacity style={{ flexDirection: "row", marginLeft: 13 }} onPress={() => navigation.goBack()}>
+              <BackIcon name="arrowleft" size={23} color='#747EEF' style={{ marginRight: 18 }} />
+              <Text style={[styles.backicontext, { marginLeft: -10 }]}>Security</Text>
             </TouchableOpacity>
           ),
           title: null,

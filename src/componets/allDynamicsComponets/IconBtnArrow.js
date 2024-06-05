@@ -4,10 +4,10 @@ import Arrow from 'react-native-vector-icons/MaterialIcons'
 import { FontsGeneral } from '../screens/style'
 const IconBtnArrow = ({Name,Imagess,HandleClick}) => {
   return (
-    <TouchableOpacity onPress={HandleClick}>
+    <TouchableOpacity style={{paddingVertical:0}} onPress={HandleClick}>
 
    
-    <View style={[styles.MainContinerBtn,{ justifyContent:'space-between',borderWidth:0.5,padding:6,borderRadius:10,marginTop:10}]}>
+    <View style={[styles.MainContinerBtn,{ justifyContent:'space-between',borderWidth:0.5,borderRadius:10,marginTop:10}]}>
         <View style={{flexDirection:'row',alignItems:'center',paddingLeft:5}} >
 <Image source={Imagess} style={styles.Imagess}  />
 <Text style={styles.btnText}>{Name}</Text>
@@ -27,7 +27,10 @@ const styles = StyleSheet.create({
     alignItems:'center',
      flexDirection:'row',
      width:'100%',
-     borderColor:'#b3b3b3'
+     borderColor:'#bF2F2F3',
+     paddingVertical:4,
+     backgroundColor:'#F2F2F3',
+     paddingHorizontal:15
    
     },
     btnText:{
