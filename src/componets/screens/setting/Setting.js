@@ -22,8 +22,8 @@ const Setting = () => {
         <IconBtnArrow HandleClick={()=>navigation.navigate('Notifications')} Imagess = { Bell} Name="Notifications"/>
         <IconBtnArrow Imagess = { Ticket} Name="Promo Codes"/>
         <IconBtnArrow HandleClick={()=>navigation.navigate('Security')} Imagess = { ShieldUser} Name="Security"/>
-        <IconBtnArrow Imagess = { QuestionCircle} Name="Help & Support"/>
-        <IconBtnArrow Imagess = { ShieldWarning} Name="Privacy policy"/>
+        <IconBtnArrow HandleClick={()=>navigation.navigate('HelpAndSupport')} Imagess = { QuestionCircle} Name="Help & Support"/>
+        <IconBtnArrow HandleClick={()=>navigation.navigate('PrivacyAndPolicy')} Imagess = { ShieldWarning} Name="Privacy policy"/>
         <View style={{paddingBottom:10}}>
         <IconBtnArrow  HandleClick={() => bottomSheet.current.show()} Imagess = { Logout} Name="Log Out"/>
         </View>

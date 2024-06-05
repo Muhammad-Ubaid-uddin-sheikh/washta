@@ -26,6 +26,9 @@ import ParticularReview from '../screens/particularCarScreen/ParticularReview';
 import EditProfileInfor from '../screens/setting/EditProfileInfor';
 import Notifications from '../screens/setting/Notifications';
 import Security from '../screens/setting/Security';
+import Password from '../screens/setting/Password';
+import PrivacyAndPolicy from '../screens/setting/PrivacyAndPolicy';
+import HelpandSupport from '../screens/setting/HelpandSupport';
 function App() {
   const Stack = createStackNavigator();
   const navigation = useNavigation();
@@ -144,6 +147,32 @@ function App() {
         }}
       />
       <Stack.Screen
+        name="Password"
+        component={Password}
+        options={{
+          headerLeft: () => (
+            <TouchableOpacity style={{ flexDirection: "row", marginLeft: 13 }} onPress={() => navigation.goBack()}>
+              <BackIcon name="arrowleft" size={23} color='#747EEF' style={{ marginRight: 18 }} />
+              <Text style={[styles.backicontext, { marginLeft: -10 }]}>Password</Text>
+            </TouchableOpacity>
+          ),
+          title: null,
+        }}
+      />
+      <Stack.Screen
+        name="PrivacyAndPolicy"
+        component={PrivacyAndPolicy}
+        options={{
+          headerLeft: () => (
+            <TouchableOpacity style={{ flexDirection: "row", marginLeft: 13 }} onPress={() => navigation.goBack()}>
+              <BackIcon name="arrowleft" size={23} color='#747EEF' style={{ marginRight: 18 }} />
+              <Text style={[styles.backicontext, { marginLeft: -10 }]}>Privacy Policy</Text>
+            </TouchableOpacity>
+          ),
+          title: null,
+        }}
+      />
+      <Stack.Screen
         name="StepThree"
         component={HireNowStepThree}
         options={{
@@ -164,6 +193,19 @@ function App() {
             <TouchableOpacity style={{ flexDirection: "row", marginLeft: 13 }} onPress={() => navigation.goBack()}>
               <BackIcon name="arrowleft" size={23} color='#747EEF' style={{ marginRight: 18 }} />
               <Text style={[styles.backicontext, { marginLeft: -10 }]}>Seller Reviews</Text>
+            </TouchableOpacity>
+          ),
+          title: null,
+        }}
+      />
+       <Stack.Screen
+        name="HelpAndSupport"
+        component={HelpandSupport}
+        options={{
+          headerLeft: () => (
+            <TouchableOpacity style={{ flexDirection: "row", marginLeft: 13 }} onPress={() => navigation.goBack()}>
+              <BackIcon name="arrowleft" size={23} color='#747EEF' style={{ marginRight: 18 }} />
+              <Text style={[styles.backicontext, { marginLeft: -10 }]}>Help & Support</Text>
             </TouchableOpacity>
           ),
           title: null,
@@ -277,7 +319,7 @@ const styles = StyleSheet.create({
   },
   backicontext: {
     color: '#212121',
-    fontSize: 16,
+    fontSize: 18,
     fontFamily: FontsGeneral.MEDIUMSANS,
   },
 });

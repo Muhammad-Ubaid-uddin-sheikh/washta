@@ -5,10 +5,11 @@ import { FontsGeneral } from '../style';
 import Button from '../../allDynamicsComponets/Button'
 import IconBtnArrow from '../../allDynamicsComponets/IconBtnArrow';
 import SecurityIcon from '../../../assets/security.png'
+import { useNavigation } from '@react-navigation/native';
 const Security = () => {
     const [isActive, setIsActive] = useState(true);
     const [sound, setsound] = useState(false);
-
+const navigation = useNavigation()
   return (
    <View style={styles.mainNotifcation}>
     <ToggleSwitch
@@ -34,7 +35,7 @@ const Security = () => {
 />
 </View>
 <View style={{paddingTop:20,paddingHorizontal:10}}>
-<IconBtnArrow Imagess ={ SecurityIcon} Name="Change Password"/>
+<IconBtnArrow HandleClick={()=>navigation.navigate('Password')} Imagess ={ SecurityIcon} Name="Change Password"/>
 </View>
 
 <View style={styles.buttonContainer}>
