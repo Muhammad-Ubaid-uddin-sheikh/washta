@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { View, TouchableOpacity, Image, Text, StyleSheet } from 'react-native';
+import { View, TouchableOpacity, Image, Text, StyleSheet, Alert } from 'react-native';
 import SettingIcon from 'react-native-vector-icons/AntDesign';
 import Bell from 'react-native-vector-icons/FontAwesome';
 import Entypo from 'react-native-vector-icons/FontAwesome';
@@ -12,12 +12,36 @@ import Location from 'react-native-vector-icons/MaterialIcons'
 import { useNavigation } from '@react-navigation/native';
 import { Fonts, FontsGeneral } from '../style';
 import Jobs from './Jobs';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'react-native-axios'
+const ApiUrl  = 'https://washta-9006f93279b8.herokuapp.com/api/Customer/Profile'
 const Tab = createBottomTabNavigator();
 
 function MyTabs() {
   const [name, setName] = useState('');
+  console.log('name',name)
+  const fetchUserData = async () => {
+    try {
+      const accessToken = await AsyncStorage.getItem('accessToken');
+      const response = await axios.get(ApiUrl, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`
+        }
+      });
+
+      if (response.data.status) {
+        setName(response.data.data || {});
+        console.log(JSON.stringify(response.data.data))
+      } else {
+        Alert.alert('Failed to fetch user data');
+      }
+    } catch (error) {
+      Alert.alert(JSON.stringify(error.response));
+    }
+  };
   useEffect(()=>{
-    setName('Jon')
+  
+    fetchUserData()
   },[])
   
 const navigation= useNavigation()
@@ -58,7 +82,7 @@ const navigation= useNavigation()
         name="Explore"
         component={Explore}
         options={{
-          title: `Hi, ${name}`,
+          title: `Hi, ${name?.username}`,
           headerStyle: {
             backgroundColor: 'white', // Change the background color
             shadowColor: 'white', // Box shadow color

@@ -8,6 +8,27 @@ import Arrow from 'react-native-vector-icons/MaterialIcons'
 import Dot from 'react-native-vector-icons/Entypo'
 import BokingCompleted from '../../allDynamicsComponets/BookingComplted'
 const Profile = ({ navigation }) => {
+  const [name, setName] = useState('');
+  console.log(name)
+  const getUserFromStorage = async () => {
+    try {
+      const userString = await AsyncStorage.getItem('user');
+      if (userString) {
+        const user = JSON.parse(userString);
+        setName(user)
+        return user;
+      } else {
+        console.log('No user data found');
+        return null;
+      }
+    } catch (error) {
+      console.error('Error parsing user data:', error);
+      return null;
+    }
+  };
+  useEffect(() => {
+    getUserFromStorage()
+  }, []);
   const bookingData = [
     {
       Name: 'John Doe Car Hub',
@@ -43,8 +64,8 @@ const Profile = ({ navigation }) => {
                 </View>
               </TouchableOpacity>
               <View style={styles.ShoeConText} >
-                <Text style={styles.textPoints} >John Doe</Text>
-                <Text style={styles.paragraph} >johndoe@example.com</Text>
+                <Text style={[styles.textPoints,{ maxWidth: 260 }]} numberOfLines={1} ellipsizeMode="tail" >{name?.username}</Text>
+                <Text style={[styles.paragraph, { maxWidth: 260 }]} numberOfLines={1} ellipsizeMode="tail"  >{name?.email}</Text>
               </View>
 
           </View>

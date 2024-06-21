@@ -2,13 +2,13 @@ import React from 'react';
 import { View, Text, StyleSheet, } from 'react-native';
 import {  Fonts, FontsGeneral } from '../screens/style';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-const Home = ({text,Link}) => {
+const Home = ({text,Link,loading}) => {
   
   return (
     <View  >
         <TouchableOpacity style={styles.container} onPress={Link}>
         <Text  style={styles.text}>
-        {text}
+        {loading ? 'Loading...' : text}
       </Text>
         </TouchableOpacity>
       

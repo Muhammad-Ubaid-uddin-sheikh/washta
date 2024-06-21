@@ -1,12 +1,19 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity,} from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert,} from 'react-native';
 import InputFeilds from '../../allDynamicsComponets/inputFeilds';
 import Button from '../../allDynamicsComponets/Button';
 import { Fonts, FontsGeneral } from '../style';
 import InputPassword from '../../allDynamicsComponets/InputPassowrd'
+import{ useToast } from 'react-native-toast-notifications';
+import Spinner from 'react-native-loading-spinner-overlay';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'react-native-axios'
+const ApiUrl  = 'https://washta-9006f93279b8.herokuapp.com/api/auth/Signup'
 const LoginScreen = ({navigation}) => {
     const [isChecked, setIsChecked] = useState(false);
-
+    const [loading, setLoading] = useState(false);
+    const [isLoggingOut, setIsLoggingOut] = useState(false);
+    const toast = useToast()
     const handleCheckBoxToggle = () => {
       setIsChecked(!isChecked);
     };
@@ -17,23 +24,54 @@ const [formData, setFormData] = useState({
     carName: '',
     carType: '',
     number: '',
-    carPlateNumber: ''
+    carPlateNumber: '',
+    CarManufacturer:''
   });
-
-const ButtonClick = ()=>{
-    navigation.navigate('OtpScreen')
-  paylod={
-    email:formData.email,
-    password:formData.password,
-    fullName:formData.fullName,
-    carName:formData.carName,
-    carType:formData.carType,
-    number:formData.number,
-    carPlateNumber:formData.carPlateNumber
-  }
-console.log(paylod)
- 
+  const paylod={
+    username: formData?.fullName,
+    password: formData?.password,
+    name: formData?.fullName,
+    email: formData?.email,
+    phone: formData?.number,
+    role : "customer",
+    car: {
+        vehicleManufacturer: formData?.CarManufacturer,
+        vehiclePlateNumber: formData?.carPlateNumber,
+        vehicleName: formData?.carName,
+        vehicleType: formData?.carType
+    }
 }
+const ButtonClick = async () => {
+  if (!formData.fullName || !formData.email || !formData.carName || !formData.password || !formData.carType || !formData.number || !formData.carPlateNumber) {
+              toast.show("Incomplete Details Plz fill All Details",{type: "danger",animationType:"zoom-in"});
+          
+    }  else{
+      setIsLoggingOut(false)
+      setLoading(false)
+  // console.log(paylod)
+  try {
+      const response = await axios.post(ApiUrl, {
+        ...paylod
+      });
+      setLoading(true);
+      if (response.data.status) {
+          const { accessToken, user, } = response.data.data;
+          // await AsyncStorage.setItem('accessToken', accessToken);
+          // await AsyncStorage.setItem('Token',accessToken);
+          // await AsyncStorage.setItem('user', JSON.stringify(user));
+          navigation.navigate('OtpScreen',{paylod})
+        console.log(paylod,'paylod')
+      }
+    } 
+    catch (error) {
+      
+      console.log(JSON.stringify(error.response));  
+    }finally{
+      setIsLoggingOut(false);
+      setLoading(false);
+  }
+}
+};
 
   return (
     <>
@@ -55,7 +93,8 @@ console.log(paylod)
       <InputFeilds keyboardType='default'   focus={true} labelName='Car Name' value={formData.carName} onChangeText={(value) => setFormData({ ...formData, carName: value })} />
       <InputFeilds keyboardType='default'   focus={true} labelName='Car Plate Number' value={formData.carPlateNumber} onChangeText={(value) => setFormData({ ...formData, carPlateNumber: value })} />
       <InputFeilds keyboardType='default'  focus={true} labelName='Car Type' value={formData.carType} onChangeText={(value) => setFormData({ ...formData, carType: value })} />
-   
+      <InputFeilds keyboardType='default'  focus={true} labelName='Car Manufacturer' value={formData.CarManufacturer} onChangeText={(value) => setFormData({ ...formData, CarManufacturer: value })} />
+
       </View>
      
       </View>
@@ -71,9 +110,16 @@ console.log(paylod)
     </View>
     
     </ScrollView>
-   
+    <Spinner
+        visible={isLoggingOut}
+        textContent={'loading...'}
+        textStyle={styles.loaderText}
+        animation="fade"
+        overlayColor="rgba(0, 0, 0, 0.7)"
+        color="white" 
+      />
     <View style={styles.bottomContent}>
-        <Button text="Sign Up" Link={ButtonClick} />
+        <Button loading={loading} text="Sign Up" Link={ButtonClick} />
       </View>
     </>
   );

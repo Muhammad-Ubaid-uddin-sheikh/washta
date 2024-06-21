@@ -34,7 +34,7 @@ const HelpandSupport = ({navigation}) => {
     </Text>
     <View style={{position:'relative',marginTop:10}}>
 <SearchIcon name='search' style={{fontSize:30,color:'black',position:'absolute',top:8,left:8}}/>
-<TextInput style={styles.inputFeild}  placeholder="Search for topics or questions..."  />
+<TextInput  placeholderTextColor="rgba(33, 33, 33, 0.60)" style={styles.inputFeild}  placeholder="Search for topics or questions..."  />
     </View>
     <Text style={{fontFamily:FontsGeneral.MEDIUMSANS,color:'black',fontSize:18,marginTop:20,marginBottom:15}}>
     Frequently Asked

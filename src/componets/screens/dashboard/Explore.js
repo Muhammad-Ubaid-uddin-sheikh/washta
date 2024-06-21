@@ -84,8 +84,9 @@ const Dashboard = ({ navigation }) => {
               </View> 
             </View>
           </View>
+          
           <View style={{ paddingTop: 10, paddingHorizontal: 10 }}>
-            <Image source={require('../../../assets/banner.png')} style={{ width: '100%', height: 160, objectFit: 'contain' }} />
+            <Image  source={require('../../../assets/banner.png')} style={{ width: '100%', height: 160, objectFit: 'contain' }} />
           </View>
           <Text style={styles.headingSubMain}>looking for something specific?</Text>
           <Text style={[styles.headingSubMain, { fontSize: 19, paddingTop: 12, paddingBottom: 10 }]}>Studios Near you</Text>

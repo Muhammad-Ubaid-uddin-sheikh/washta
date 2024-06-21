@@ -1,33 +1,38 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import React, { useEffect } from 'react'
 import { Image,  StyleSheet, View} from 'react-native'
 
-const SplashScreen = ({ navigation }) => {
-    useEffect(() => {
+const SplashScreen = () => {
+    const navigation = useNavigation()
+    // useEffect(() => {
+    //     setTimeout(() => {
+    //       navigation.replace('Home');
+    //     }, 3000); 
+    //   }, []);
+      useEffect(() => {
         setTimeout(() => {
-          navigation.replace('Home');
-        }, 3000); 
-      }, []);
-
+            handleTokenConform()
+        }, 3000)
+    }, [])
     // useFocusEffect(
     //     React.useCallback(() => {
     //         handleTokenConform(); // Call handleTokenConform whenever the screen comes into focus
     //     }, [])
     // );
-
-    // const handleTokenConform= async () => {
-    //     const dataToken = await AsyncStorage.getItem('accessToken')
-    //     const courtToken = await AsyncStorage.getItem('accessTokenCourt')
-    //     // const Userdata = await AsyncStorage.getItem('user')
-    //     if(courtToken){
-    //         navigation.replace('CourtDashboard')
-    //     }
-    //     else if (dataToken){
-    //         navigation.replace('Dashboard')
-    //     }
-    //     else {
-    //         navigation.replace('Home')
-    //     }
-    // }
+    // const dataToken = AsyncStorage.getItem('accessToken')
+    // console.log(dataToken)
+    const handleTokenConform= async () => {
+        const dataToken = await AsyncStorage.getItem('accessToken')
+        console.log(dataToken)
+        // const Userdata = await AsyncStorage.getItem('user')
+        if (dataToken){
+            navigation.replace('Dashbaord')
+        }
+        else {
+            navigation.replace('Home')
+        }
+    }
 
     return (
         <View style={styles.maincontainer}>

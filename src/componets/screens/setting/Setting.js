@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import { SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import IconBtnArrow from '../../allDynamicsComponets/IconBtnArrow'
 import EditProfile from '../../../assets/EditProfileIcon.png'
@@ -12,9 +12,37 @@ import BottomSheet from "react-native-gesture-bottom-sheet";
 import { Fonts, FontsGeneral } from '../style'
 import Button from '../../allDynamicsComponets/Button'
 import { useNavigation } from '@react-navigation/native'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import Spinner from 'react-native-loading-spinner-overlay'
 const Setting = () => {
   const bottomSheet = useRef();
   const navigation = useNavigation()
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
+  const handleTokenConform= async () => {
+   
+    try {
+  
+      await AsyncStorage.removeItem('user');
+      await AsyncStorage.removeItem('accessToken');
+      await AsyncStorage.clear();
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'Home' }],
+      });
+    } catch (error) {
+      console.error('Error deleting data:', error);
+    }
+  }
+  const handleLogout = async () => { 
+    setIsLoggingOut(true);
+    setTimeout(() => {
+      setIsLoggingOut(false);
+      bottomSheet.current.close()
+      handleTokenConform()
+    }, 500);
+   
+   
+  };
   return (
    
       <ScrollView style={styles.mainsettingcon} showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false}>
@@ -39,12 +67,23 @@ const Setting = () => {
         {/* Content of the Bottom Sheet */}
         <View style={styles.bottomSheetContent}>
           <Text style={styles.bottomSheetText}>Logout</Text>
-          <Text style={{fontFamily:Fonts.MEDIUM,textAlign:'center',paddingTop:10,fontSize:15}}>Are you sure you want to log out?</Text>
+          <Text style={{fontFamily:Fonts.MEDIUM,textAlign:'center',paddingTop:10,fontSize:15,color:'black'}}>Are you sure you want to log out?</Text>
        <View style={{paddingTop:20,paddingBottom:10}}>
-        <Button text='Yes, Logout'/>
-        <TouchableOpacity onPress={() => bottomSheet.current.close()} style={{width:'100%',borderWidth:1,textAlign:'center',borderRadius:50,marginTop:10}}>
-          <Text style={{textAlign:'center',fontFamily:FontsGeneral.MEDIUMSANS,fontSize:16,color:'black',paddingVertical:13}}>Cencel</Text>
+        <TouchableOpacity onPress={handleLogout}>
+        <Button Link={handleLogout} text='Yes, Logout'/>
         </TouchableOpacity>
+       
+        <TouchableOpacity onPress={() => bottomSheet.current.close()} style={{width:'100%',borderWidth:1,textAlign:'center',borderRadius:50,marginTop:10}}>
+          <Text style={{textAlign:'center',fontFamily:FontsGeneral.MEDIUMSANS,fontSize:16,color:'black',paddingVertical:13}}>Cancel</Text>
+        </TouchableOpacity>
+        <Spinner
+        visible={isLoggingOut}
+        textContent={'Logout...'}
+        textStyle={styles.loaderText}
+        animation="fade"
+        overlayColor="rgba(0, 0, 0, 0.7)"
+        color="white" 
+      />
         </View>
         </View>
       </BottomSheet>
@@ -54,7 +93,12 @@ const Setting = () => {
   )
 }
 const styles = StyleSheet.create({
-  mainsettingcon:{
+  loaderText:{
+    color:'white',
+    opacity:1,
+    fontFamily:FontsGeneral.MEDIUMSANS,
+    fontSize:20
+  },  mainsettingcon:{
     paddingHorizontal:15,
     backgroundColor:'white',
     paddingBottom:10

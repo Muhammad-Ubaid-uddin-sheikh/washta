@@ -1,12 +1,25 @@
 import React, { useRef, useState } from 'react';
-import { View, Text, StyleSheet, TextInput } from 'react-native';
+import { View, Text, StyleSheet, TextInput, Alert } from 'react-native';
 import Button from '../../allDynamicsComponets/Button';
 import { Fonts, FontsGeneral } from '../style';
+import { useToast } from 'react-native-toast-notifications';
+import axios from 'react-native-axios'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+const ApiUrl  = 'https://washta-9006f93279b8.herokuapp.com/api/otp/verifiction'
 
-const OtpScreen = ({navigation}) => {
+const OtpScreen = ({navigation,route}) => {
+  const {paylod} = route.params;
+  console.log('payloasdasd',paylod.email)
   const [otp, setOTP] = useState(['', '', '', '']);
   const inputs = useRef([]);
-
+  const [loading, setLoading] = useState(false);
+  const concatenatedString = otp?.join("");
+  const toast = useToast()
+  const payloads ={
+    code: concatenatedString,
+    role: "customer",
+    email: paylod?.email
+}
   const handleChangeText = (text, index) => {
     const newOTP = [...otp];
     newOTP[index] = text;
@@ -15,11 +28,32 @@ const OtpScreen = ({navigation}) => {
       inputs.current[index + 1].focus();
     }
   };
-const ButtonClick = ()=>{
-  console.log(otp)
-  navigation.navigate('EnableLocation')
+const ButtonClick = async () => {
+  if (!otp ) {
+    toast.show("Incomplete Details Plz fill Otp Details",{type: "danger",animationType:"zoom-in"}); 
+    }  else{
+      setLoading(true)
+        try {
+      const response = await axios.post(ApiUrl, {
+        ...payloads
+      });
+      setLoading(true);
+      if (response.data.status) {
+          const { accessToken, user, } = response.data.data;
+          await AsyncStorage.setItem('accessToken', accessToken);
+          await AsyncStorage.setItem('Token',accessToken);
+          await AsyncStorage.setItem('user', JSON.stringify(user));
+          navigation.navigate('EnableLocation')
+        console.log('paylod')
+      }
+    } 
+    catch (error) {
+      Alert.alert(error);  
+    }finally{
+      setLoading(false);
+  }
 }
-
+}
   return (
     <View style={styles.container}>
       <View style={styles.topContent}>
@@ -43,7 +77,7 @@ const ButtonClick = ()=>{
       <Text style={styles.forgotPas}>Resend code</Text>
       </View>
       <View style={styles.bottomContent}>
-        <Button text="Verify" Link={ButtonClick} />
+        <Button loading={loading} text="Verify" Link={ButtonClick} />
       </View>
     </View>
   );
@@ -107,6 +141,7 @@ const styles = StyleSheet.create({
     height: 60,
     textAlign: 'center',
     fontSize: 20,
+    color:'black'
   },
 });
 
